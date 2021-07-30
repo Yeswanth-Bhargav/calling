@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contacr manager</title>
+</head>
+<body>
+    <h1>Contact Manager</h1>
+    <input type='text' id='search'placeholder="search by name or mobile"/><br/>
+    <h2 id='title'></h2>
+    <ul id='list'>
+
+    </ul>
+    <script>
+        const contacts = [
+                { name: 'Ross call', mobile: '9876543211'},
+                { name: 'Joey', mobile: '8765432122' },
+                { name: 'Monica', mobile: '6543211234'},
+                { name: 'Rachel', mobile: '7654321123' }
+            ]
+        const search=document.getElementById('search')
+        const title=document.getElementById('title')
+        const list=document.getElementById('list')
+        function limaker(arr){
+            arr.forEach(function(ele){
+            const litag=document.createElement('li')
+            litag.textContent=`${ele.name} - ${ele.mobile}`
+            list.appendChild(litag)
+        })
+        }
+        function counter(arr){
+            title.textContent=`My Contacts-${arr.length}`
+        }
+        limaker(contacts)
+        counter(contacts)
+        
+        
+
+        search.addEventListener('keyup',function(e){
+            const inpval=e.target.value
+            const result=contacts.filter(function(ele){
+                return ele.name.toLowerCase().includes(inpval)||ele.mobile.toLowerCase().includes(inpval)
+            })
+            list.innerHTML=''
+            limaker(result)
+            counter(result)
+            
+        })
+        
+
+    </script>
+    
+</body>
+</html>
